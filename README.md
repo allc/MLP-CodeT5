@@ -1,3 +1,5 @@
+Note: The modified branch only tries to ensure correct behaviours for Code Generation tasks
+
 # CodeT5: Identifier-aware Unified Pre-trained Encoder-Decoder Models for Code Understanding and Generation
 
 This is the official PyTorch implementation for the following EMNLP 2021 paper from Salesforce Research:

@@ -1,4 +1,5 @@
-WORKDIR="path_to_your_dir/CodeT5"
+# WORKDIR="path_to_your_dir/CodeT5"
+WORKDIR=${16}
 export PYTHONPATH=$WORKDIR
 
 TASK=${1}
@@ -25,7 +26,7 @@ else
 fi
 
 if [[ ${TASK} == 'multi_task' ]]; then
-  FULL_MODEL_TAG=${MODEL_TAG}_${DATA_TAG}_lr${LR}_s${16}
+  FULL_MODEL_TAG=${MODEL_TAG}_${DATA_TAG}_lr${LR}_s${17}
 else
   FULL_MODEL_TAG=${MODEL_TAG}_${DATA_TAG}_lr${LR}_bs${BS}_src${SRC_LEN}_trg${TRG_LEN}_pat${PATIENCE}_e${EPOCH}
 fi
@@ -69,7 +70,7 @@ fi
 
 if [[ ${TASK} == 'multi_task' ]]; then
   RUN_FN=${WORKDIR}/run_multi_gen.py
-  MULTI_TASK_AUG='--max_steps '${16}' --save_steps '${17}' --log_steps '${18}
+  MULTI_TASK_AUG='--max_steps '${17}' --save_steps '${18}' --log_steps '${19}
 elif [[ ${TASK} == 'clone' ]]; then
   RUN_FN=${WORKDIR}/run_clone.py
 elif [[ ${TASK} == 'defect' ]] && [[ ${MODEL_TYPE} == 'roberta' ||  ${MODEL_TYPE} == 'bart' ]]; then

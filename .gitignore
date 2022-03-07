@@ -1,0 +1,6 @@
+__pycache__/
+data/
+finetuned_models/
+pretrained_models/
+saved_models/
+tensorboard/
