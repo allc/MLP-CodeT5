@@ -226,7 +226,7 @@ def read_examples(filename, data_num, task):
         'refine': read_refine_examples,
         'translate': read_translate_examples,
         'concode': read_concode_examples,
-        'codecontest': read_concode_examples,
+        'codecontest': read_codecontest_examples,
         'clone': read_clone_examples,
         'defect': read_defect_examples,
     }

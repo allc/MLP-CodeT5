@@ -1,4 +1,5 @@
 import json
+import random
 
 
 def add_lang_by_task(target_str, task, sub_task):
@@ -227,6 +228,36 @@ def read_concode_examples(filename, data_num):
             idx += 1
             if idx == data_num:
                 break
+    return examples
+
+
+def read_codecontest_examples(filename, data_num):
+    """Read examples from filename."""
+    examples = []
+
+    data_num_all = sum(1 for _ in open(filename))
+    print(f'number of all data: {data_num_all}')
+    with open(filename) as f:
+        if data_num > 0:
+            ids = random.sample(range(data_num_all), min(data_num, data_num_all))
+        else:
+            ids = range(data_num_all)
+        print(f'sampling {len(ids)} data')
+        idsa = [False] * data_num_all
+        for idx in ids:
+            idsa[idx] = True
+
+        for idx, line in enumerate(f):
+            if not idsa[idx]:
+                continue
+            x = json.loads(line)
+            examples.append(
+                Example(
+                    idx=idx,
+                    source=x["nl"].strip(),
+                    target=x["code"].strip()
+                )
+            )
     return examples
 
 
