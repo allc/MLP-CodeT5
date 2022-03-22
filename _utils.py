@@ -235,7 +235,11 @@ def read_codecontest_examples(filename, data_num):
     """Read examples from filename."""
     examples = []
 
-    data_num_all = sum(1 for _ in open(filename))
+    with open(filename) as f:
+        data_num_all = 0
+        for line in f:
+            x = json.loads(line)
+            data_num_all += len(x['codes'])
     print(f'number of all data: {data_num_all}')
     with open(filename) as f:
         if data_num > 0:
@@ -243,19 +247,23 @@ def read_codecontest_examples(filename, data_num):
         else:
             ids = range(data_num_all)
         print(f'sampling {len(ids)} data')
-        idsa = [False] * data_num_all
+    with open(filename) as f:
+        loaded_i = 0
+        current_i = 0
         for idx in ids:
-            idsa[idx] = True
+            while current_i >= 0:
+                line = f.readline()
+                x = json.loads(line)
+                loaded_i += len(x['codes'])
+                current_i = idx - loaded_i
+            code = x['codes'][current_i]
+            nl = 'RATING: {} \n TAGS: {} \n LANGUAGE IS {} \n {} \n {}'.format(x['rating'], ' , '.join(x['tags']), code['language'], 'CORRECT' if code['is_correct'] else 'INCORRECT' + ' SOLUTION', x['problem'])
 
-        for idx, line in enumerate(f):
-            if not idsa[idx]:
-                continue
-            x = json.loads(line)
             examples.append(
                 Example(
                     idx=idx,
-                    source=x["nl"].strip(),
-                    target=x["code"].strip()
+                    source=nl.strip(),
+                    target=code['code'].strip()
                 )
             )
     return examples
