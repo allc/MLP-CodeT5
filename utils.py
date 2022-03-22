@@ -175,6 +175,11 @@ def get_filenames(data_root, task, sub_task, split=''):
         train_fn = '{}/train.json'.format(data_dir)
         dev_fn = '{}/dev.json'.format(data_dir)
         test_fn = '{}/test.json'.format(data_dir)
+    elif task == 'codecontest':
+        data_dir = '{}/{}'.format(data_root, task)
+        train_fn = '{}/code_contests_train.jsonl'.format(data_dir)
+        dev_fn = '{}/code_contests_valid.jsonl'.format(data_dir)
+        test_fn = '{}/code_contests_test.jsonl'.format(data_dir)
     elif task == 'summarize':
         data_dir = '{}/{}/{}'.format(data_root, task, sub_task)
         train_fn = '{}/train.jsonl'.format(data_dir)
@@ -221,6 +226,7 @@ def read_examples(filename, data_num, task):
         'refine': read_refine_examples,
         'translate': read_translate_examples,
         'concode': read_concode_examples,
+        'codecontest': read_concode_examples,
         'clone': read_clone_examples,
         'defect': read_defect_examples,
     }
