@@ -22,7 +22,7 @@ if [[ $DATA_NUM == -1 ]]; then
   DATA_TAG='all'
 else
   DATA_TAG=$DATA_NUM
-  EPOCH=1
+  # EPOCH=1
 fi
 
 if [[ ${TASK} == 'multi_task' ]]; then

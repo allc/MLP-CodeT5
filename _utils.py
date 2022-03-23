@@ -240,10 +240,13 @@ def read_codecontest_examples(filename, data_num):
         for line in f:
             x = json.loads(line)
             data_num_all += len(x['codes'])
+            print(f'\rcounting {data_num_all} sample', end='')
+        print()
     print(f'number of all data: {data_num_all}')
     with open(filename) as f:
         if data_num > 0:
             ids = random.sample(range(data_num_all), min(data_num, data_num_all))
+            ids = sorted(ids)
         else:
             ids = range(data_num_all)
         print(f'sampling {len(ids)} data')
@@ -251,6 +254,8 @@ def read_codecontest_examples(filename, data_num):
         loaded_i = 0
         current_i = 0
         for idx in ids:
+            print(f'\rsampling data {idx}', end='')
+            current_i = idx - loaded_i
             while current_i >= 0:
                 line = f.readline()
                 x = json.loads(line)
@@ -266,6 +271,7 @@ def read_codecontest_examples(filename, data_num):
                     target=code['code'].strip()
                 )
             )
+        print()
     return examples
 
 
