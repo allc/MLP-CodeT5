@@ -4,3 +4,4 @@ finetuned_models/
 pretrained_models/
 saved_models/
 tensorboard/
+output/

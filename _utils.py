@@ -353,4 +353,4 @@ def read_clone_examples(filename, data_num):
 
 def build_codecontest_input(rating, tags, language, is_correct, problem_statement):
     return 'RATING: {}\nTAGS: {}\nLANGUAGE IS {}\n{} SOLUTION\n{}'.format( \
-        rating, ', '.join(tags), language, 'CORRECT' if is_correct else 'INCORRECT', problem_statement)
+        rating, ', '.join(sorted(tags)), language, 'CORRECT' if is_correct else 'INCORRECT', problem_statement)
