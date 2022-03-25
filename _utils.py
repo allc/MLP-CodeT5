@@ -262,7 +262,7 @@ def read_codecontest_examples(filename, data_num):
                 loaded_i += len(x['codes'])
                 current_i = idx - loaded_i
             code = x['codes'][current_i]
-            nl = 'RATING: {} \n TAGS: {} \n LANGUAGE IS {} \n {} \n {}'.format(x['rating'], ' , '.join(x['tags']), code['language'], 'CORRECT' if code['is_correct'] else 'INCORRECT' + ' SOLUTION', x['problem'])
+            nl = 'RATING: {} \n TAGS: {} \n LANGUAGE IS {} \n {} \n {}'.format(x['rating'], x['tags'], code['language'], 'CORRECT' if code['is_correct'] else 'INCORRECT' + ' SOLUTION', x['problem'])
 
             examples.append(
                 Example(
