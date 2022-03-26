@@ -10,7 +10,7 @@ from _utils import build_codecontest_input
 
 
 LANGUAGES = [
-    'python',
+    'python3',
 ]
 METADATA_SAMPLE_TIMES = 10
 NUMBER_OF_GENERATE_SAMPLE = 10
