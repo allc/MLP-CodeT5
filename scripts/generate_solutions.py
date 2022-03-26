@@ -35,12 +35,22 @@ def main():
     argparser = argparse.ArgumentParser()
     argparser.add_argument('in_file')
     argparser.add_argument('out_dir')
+    argparser.add_argument('--model', choices=['base', 'small'], default='base')
+    argparser.add_argument('--model_dir')
     argparser.add_argument('--continue', action='store_true', dest='is_continued')
     argparser.add_argument('--no_cuda', action='store_true')
     args = argparser.parse_args()
 
-    tokenizer = RobertaTokenizer.from_pretrained('Salesforce/codet5-base')
-    model = T5ForConditionalGeneration.from_pretrained('Salesforce/codet5-base')
+    if args.model == 'base':
+        tokenizer_path = 'Salesforce/codet5-base'
+        model_path = 'Salesforce/codet5-base'
+    elif args.model == 'small':
+        tokenizer_path = 'Salesforce/codet5-small'
+        model_path = 'Salesforce/codet5-small'
+    if 'model_dir' in args:
+        model_path = args.model_dir
+    tokenizer = RobertaTokenizer.from_pretrained(tokenizer_path)
+    model = T5ForConditionalGeneration.from_pretrained(model_path)
     if args.no_cuda or not torch.cuda.is_available():
         device = 'cpu'
     else:
