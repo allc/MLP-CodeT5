@@ -47,7 +47,7 @@ def main():
     elif args.model == 'small':
         tokenizer_path = 'Salesforce/codet5-small'
         model_path = 'Salesforce/codet5-small'
-    if 'model_dir' in args:
+    if args.model_dir is not None:
         model_path = args.model_dir
     tokenizer = RobertaTokenizer.from_pretrained(tokenizer_path)
     model = T5ForConditionalGeneration.from_pretrained(model_path)
