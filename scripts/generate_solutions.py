@@ -12,8 +12,6 @@ from _utils import build_codecontest_input
 LANGUAGES = [
     'python3',
 ]
-METADATA_SAMPLE_TIMES = 10
-NUMBER_OF_GENERATE_SAMPLE = 10
 MAX_LENGTH = 2048
 
 
@@ -37,6 +35,8 @@ def main():
     argparser.add_argument('out_dir')
     argparser.add_argument('--model', choices=['base', 'small'], default='base')
     argparser.add_argument('--model_dir')
+    argparser.add_argument('--metadata_sample', type=int, default=50)
+    argparser.add_argument('--sample_num', type=int, default=20)
     argparser.add_argument('--continue', action='store_true', dest='is_continued')
     argparser.add_argument('--no_cuda', action='store_true')
     args = argparser.parse_args()
@@ -77,7 +77,7 @@ def main():
                 continue
             x = json.loads(line)
             out_data = {'problem_name': x['problem_name'], 'generated_solutions': []}
-            for i in range(METADATA_SAMPLE_TIMES):
+            for i in range(args.metadata_sample):
                 print(f'\rSolving problem {ln} with metadata sample {i}', end='')
                 rating = random.randint(8, 35) * 100
                 tags = random.choice(most_popular_tags)
@@ -92,7 +92,7 @@ def main():
                     temperature=0.7,
                     top_k=50,
                     top_p=0.95,
-                    num_return_sequences=NUMBER_OF_GENERATE_SAMPLE,
+                    num_return_sequences=args.sample_num,
                 )
                 generated_solutions = map(lambda x: tokenizer.decode(x, skip_special_tokens=True), generated_ids)
                 for s in generated_solutions:
