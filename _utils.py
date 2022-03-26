@@ -239,7 +239,7 @@ def read_codecontest_examples(filename, data_num):
         data_num_all = 0
         for line in f:
             x = json.loads(line)
-            data_num_all += len(x['codes'])
+            data_num_all += len(x['solutions'])
             print(f'\rcounting {data_num_all} sample', end='')
         print()
     print(f'number of all data: {data_num_all}')
@@ -259,16 +259,16 @@ def read_codecontest_examples(filename, data_num):
             while current_i >= 0:
                 line = f.readline()
                 x = json.loads(line)
-                loaded_i += len(x['codes'])
+                loaded_i += len(x['solutions'])
                 current_i = idx - loaded_i
-            code = x['codes'][current_i]
-            nl = 'RATING: {} \n TAGS: {} \n LANGUAGE IS {} \n {} \n {}'.format(x['rating'], x['tags'], code['language'], 'CORRECT' if code['is_correct'] else 'INCORRECT' + ' SOLUTION', x['problem'])
+            solution = x['solutions'][current_i]
+            nl = build_codecontest_input(x['rating'], x['tags'], solution['language'], solution['is_correct'], x['problem_description'])
 
             examples.append(
                 Example(
                     idx=idx,
                     source=nl.strip(),
-                    target=code['code'].strip()
+                    target=solution['code'].strip()
                 )
             )
         print()
