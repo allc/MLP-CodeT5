@@ -48,11 +48,16 @@ def get_args_by_task_model(task, sub_task, model_tag):
             trg_len = 240
         epoch = 50
         patience = 5
-    elif task == 'concode' or task == 'codecontest':
+    elif task == 'concode':
         # Read 100000 examples, avg src len: 71, avg trg len: 26, max src len: 567, max trg len: 140
         # [TOKENIZE] avg src len: 213, avg trg len: 33, max src len: 2246, max trg len: 264
         src_len = 320
         trg_len = 150
+        epoch = 30
+        patience = 3
+    elif task == 'codecontest':
+        src_len = 512
+        trg_len = 512
         epoch = 30
         patience = 3
     elif task == 'defect':

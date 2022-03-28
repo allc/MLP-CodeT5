@@ -12,7 +12,7 @@ from _utils import build_codecontest_input
 LANGUAGES = [
     'python3',
 ]
-MAX_LENGTH = 2048
+MAX_LENGTH = 4096
 
 
 '''
@@ -22,7 +22,7 @@ Output JSONL:
     'generated_solutions': [
         'pseudo_rating': 800,
         'pseudo_tags': [],
-        'language': 'python',
+        'language': 'python3',
         'code': ''
     ]
 }
