@@ -56,8 +56,8 @@ def get_args_by_task_model(task, sub_task, model_tag):
         epoch = 30
         patience = 3
     elif task == 'codecontest':
-        src_len = 1024
-        trg_len = 1024
+        src_len = 512
+        trg_len = 512
         epoch = 30
         patience = 3
     elif task == 'defect':
